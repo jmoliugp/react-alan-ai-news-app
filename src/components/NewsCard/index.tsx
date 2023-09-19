@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { NewsArticle } from "../../entities";
+import { useStyles } from "./styles";
 
 interface Props {
   article: NewsArticle;
@@ -20,12 +21,16 @@ const DEFAULT_ARTICLE_THUMBNAIL =
 
 export const NewsCard: React.FC<Props> = ({ article, index }) => {
   const date = new Date(article.publishedAt).toDateString();
+  const classes = useStyles();
 
   return (
-    <Card>
-      <CardActionArea>
-        <CardMedia image={article.urlToImage ?? DEFAULT_ARTICLE_THUMBNAIL} />
-        <div>
+    <Card className={classes.card}>
+      <CardActionArea href={article.url} target="_blank">
+        <CardMedia
+          className={classes.media}
+          image={article.urlToImage ?? DEFAULT_ARTICLE_THUMBNAIL}
+        />
+        <div className={classes.details}>
           <Typography variant="body2" color="textSecondary" component="h2">
             {date}
           </Typography>
@@ -33,7 +38,12 @@ export const NewsCard: React.FC<Props> = ({ article, index }) => {
             {article.source.name}
           </Typography>
         </div>
-        <Typography gutterBottom variant="h5">
+        <Typography
+          className={classes.title}
+          component="h2"
+          gutterBottom
+          variant="h5"
+        >
           {article.title}
         </Typography>
         <CardContent>
@@ -41,11 +51,11 @@ export const NewsCard: React.FC<Props> = ({ article, index }) => {
             {article.description}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions className={classes.cardActions}>
           <Button size="small" color="primary">
             Learn More
           </Button>
-          <Typography variant="h5" color="textSecondary">
+          <Typography variant="h5" color="textSecondary" component="h2">
             {index + 1}
           </Typography>
         </CardActions>
