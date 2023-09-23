@@ -24,7 +24,11 @@ export const NewsCards: React.FC<Props> = (props) => {
         {props.articles.map((article, index) => {
           return (
             <Grid item xs={12} sm={6} md={4} lg={3} style={{ display: "flex" }}>
-              <NewsCard article={article} index={index} />
+              <NewsCard
+                activeArticle={props.activeAticleIndex}
+                article={article}
+                index={index}
+              />
             </Grid>
           );
         })}
