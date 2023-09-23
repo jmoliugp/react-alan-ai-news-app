@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import { NewsCards } from "./components/NewsCards";
-import { NewsArticle } from "./entities";
+import { NewsArticle, stubArticles } from "./entities";
 import { useStyles } from "./styles";
 import { InfoCards } from "./components/InfoCards";
+
+interface CommandParams {
+  command?: Command;
+  articles?: NewsArticle[];
+  selectedArticleIndex?: number;
+}
+
+enum Command {
+  NewHeadlines = "newHeadlines",
+  Highlight = "highlight",
+  Open = "open",
+}
 
 const ALAN_KEY = process.env.ALAN_KEY;
 
 export function App() {
-  const [newsArticles, setNewsArticles] = useState<NewsArticle[]>([]);
-  const [activeArticle, setActiveArticle] = useState(0);
+  const [newsArticles, setNewsArticles] = useState<NewsArticle[]>(stubArticles);
+  const [activeArticle, setActiveArticle] = useState(-1);
   const classes = useStyles();
 
   useEffect(() => {
@@ -18,12 +30,22 @@ export function App() {
     alanBtn({
       key: ALAN_KEY,
       // @ts-ignore
-      onCommand: ({ command, articles }) => {
-        if (command === "newHeadlines") {
-          setNewsArticles(articles);
+      onCommand: ({
+        command,
+        articles,
+        selectedArticleIndex,
+      }: CommandParams) => {
+        if (command === Command.NewHeadlines) {
+          setNewsArticles(articles ?? []);
         }
-        if (command === "highlight") {
+        if (command === Command.Highlight) {
           setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
+        }
+        if (command === Command.Open) {
+          if (!articles || !selectedArticleIndex) return;
+
+          const url = articles[selectedArticleIndex].url;
+          window.open(url, "_blank");
         }
       },
     });
