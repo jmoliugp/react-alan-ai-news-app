@@ -4,7 +4,6 @@ import { NewsCard } from "../NewsCard";
 import { Grid, Grow } from "@material-ui/core";
 
 import { useStyles } from "./styles";
-import { InfoCards } from "../InfoCards";
 
 interface Props {
   activeAticleIndex: number;
@@ -13,10 +12,6 @@ interface Props {
 
 export const NewsCards: React.FC<Props> = (props) => {
   const classes = useStyles();
-
-  if (props.articles.length === 0) {
-    return <InfoCards />;
-  }
 
   return (
     <Grow in>
