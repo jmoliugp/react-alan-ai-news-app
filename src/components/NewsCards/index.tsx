@@ -34,8 +34,6 @@ const infoCards = [
 export const NewsCards: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  console.log("## props.articles.length: ", props.articles.length);
-
   if (props.articles.length === 0) {
     return (
       <Grow in>
