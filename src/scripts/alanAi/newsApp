@@ -11,6 +11,8 @@ intent("Give me the news from $(source* (.*))", async (p) => {
     const source = p.source.value;
     const articles = await getNews({ source });
 
+    savedArticles = articles;
+
     p.play({ command: "newHeadlines", articles });
     p.play(`Here are the (latest|recent) news from ${p.source.value}.`);
 
@@ -26,6 +28,8 @@ intent("what's up with $(term* (.*))", async (p) => {
   try {
     const term = p.term.value;
     const articles = await getNews({ term });
+
+    savedArticles = articles;
 
     p.play({ command: "newHeadlines", articles });
     p.play(`Here are the (latest|recent) news from ${p.source.value}.`);
@@ -132,15 +136,20 @@ const confirmation = context(() => {
   });
 });
 
-intent("open (the|) (article|) (number|) $(number* (.*))", (p) => {
-  if (p.number.value) {
-    p.play({
-      command: "open",
-      number: p.number.value,
-      articles: savedArticles,
-    });
+intent(
+  "open (the|) (article|) (number|) $(selectedArticleIndex* (.*))",
+  (p) => {
+    const selectedArticleIndex = p.selectedArticleIndex.value;
+
+    if (selectedArticleIndex) {
+      p.play({
+        command: "open",
+        selectedArticleIndex,
+        articles: savedArticles,
+      });
+    }
   }
-});
+);
 
 intent("(go|) back", (p) => {
   p.play("Sure, going back");
