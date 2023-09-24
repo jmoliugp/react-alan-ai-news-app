@@ -13,6 +13,10 @@ News Voice is a revolutionary 🚀 News App built with React.JS, leveraging the 
 
 The Alan AI script is designed to retrieve news articles using the News API based on user voice commands. The user can ask for news by source, by term, or by category, and the script fetches the relevant articles and presents them to the user. The user can also ask to read the headlines or open a specific article.
 
+🎥 Demo
+
+[![App demo](https://i9.ytimg.com/vi_webp/baHwrLGl63k/mq2.webp?sqp=CPjBwqgG-oaymwEmCMACELQB8quKqQMa8AEB-AHsCYAC0AWKAgwIABABGEcgSyhlMA8=&rs=AOn4CLBw-knQ2k2TIlis6yr7FAW9KrDGGQ)](https://youtu.be/baHwrLGl63k)
+
 ### 📂 Sections of the Script
 
 1. **🎙️ Voice Command Controllers**: Define the voice commands for user interaction.
@@ -34,7 +38,7 @@ The Alan AI script is designed to retrieve news articles using the News API base
 
 1. 📂 Clone the repository
    ```sh
-   git clone https://github.com/your-username/news-voice.git
+   git clone git@github.com:jmoliugp/react-alan-ai-news-app.git
    ```
 2. 📦 Install NPM packages
    ```sh
@@ -78,3 +82,12 @@ This project is licensed under the MIT License.
 - [News API](https://newsapi.org/)
 - [Material-UI](https://mui.com/)
 - [JS Mastery](https://www.jsmastery.pro/)
+
+---
+
+### 📝 Final Notes
+
+- Make sure to replace placeholders like `your-username`, `your_news_api_key`, `your_alan_ai_key`, `Your Name`, `Your Email`, and any other placeholder with your actual details.
+- You might want to add screenshots 📸 or GIFs 🎞️ showcasing the app in action, to make the README more visually appealing.
+- Consider adding a section for known issues 🐛 and a roadmap 🗺️ for future enhancements.
+- Don’t forget to add the actual `CONTRIBUTING.md` and `LICENSE.md` files to your repository.
