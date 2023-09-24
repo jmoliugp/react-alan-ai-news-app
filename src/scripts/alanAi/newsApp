@@ -1,3 +1,19 @@
+/*
+ * Alan AI Script for News Retrieval
+ *
+ * This script is designed to be used within the Alan AI platform. Alan AI is a voice AI platform that allows developers to create voice experiences and integrate them into their applications.
+ * For more information about Alan AI, please visit: https://alan.app/
+ *
+ * This specific script is used to retrieve news articles from various sources or based on specific terms or categories, using the News API. The user can ask for news by source, by term, or by category, and the script will fetch the relevant articles and present them to the user. The user can also ask to read the headlines or open a specific article.
+ *
+ * The script is divided into different sections:
+ * 1. Voice command controllers: Define the voice commands that the user can use to interact with the application.
+ * 2. Networking functions: Contain the function to call the News API and retrieve the articles.
+ * 3. Util functions: Include the confirmation context and other utility functions.
+ *
+ * Please note that you need to have a valid News API key set in the environment variable `NEWS_API_KEY` to use this script.
+ */
+
 const newsApiKey = process.env.NEWS_API_KEY;
 let savedArticles = [];
 
