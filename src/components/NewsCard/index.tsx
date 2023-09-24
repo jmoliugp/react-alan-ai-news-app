@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import {
   Card,
   CardActions,
@@ -18,8 +18,6 @@ interface Props {
   index: number;
 }
 
-type CardRef = React.RefObject<any>;
-
 const DEFAULT_ARTICLE_THUMBNAIL =
   "https://img.freepik.com/free-vector/breaking-news-concept_23-2148500601.jpg?w=2000&t=st=1695089460~exp=1695090060~hmac=7a56ae906e6dfd76edb1b14d014c9f38801bf16c1517bcdbd72ee53877755d53";
 
@@ -30,31 +28,20 @@ export const NewsCard: React.FC<Props> = ({
 }) => {
   const date = new Date(article.publishedAt).toDateString();
   const classes = useStyles();
-  const [elRefs, setElRefs] = useState<CardRef[]>([]);
+  const gridElementRef = useRef<any>(null);
 
   const isActive = activeArticle === index;
-  const scrollToRef = (ref: CardRef) =>
-    window.scroll(0, ref.current.offSetTop - 50);
-
-  useEffect(() => {
-    setElRefs((refs) =>
-      Array(20)
-        // @ts-ignore
-        .fill()
-        .map((_, j) => refs[j] || createRef())
-    );
-  }, []);
-
-  useEffect(() => {
-    if (isActive && elRefs[activeArticle]) {
-      scrollToRef(elRefs[activeArticle]);
-    }
-  }, [index, isActive, elRefs]);
+  if (isActive && gridElementRef.current !== null) {
+    gridElementRef.current.scrollIntoView({ behavior: "smooth" });
+  }
 
   const activeStyle = isActive ? classes.activeCard : null;
 
   return (
-    <Card ref={elRefs[index]} className={classNames(classes.card, activeStyle)}>
+    <Card
+      ref={gridElementRef}
+      className={classNames(classes.card, activeStyle)}
+    >
       <CardActionArea href={article.url} target="_blank">
         <CardMedia
           className={classes.media}
